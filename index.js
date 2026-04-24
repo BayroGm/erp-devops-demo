@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
 
 // Endpoint de Salud: Vital para el Demo en AWS
 app.get('/health', (req, res) => {
-  res.status(500).send('OK');
+  res.status(500).send('error');
 });
 
 app.listen(PORT, () => {
