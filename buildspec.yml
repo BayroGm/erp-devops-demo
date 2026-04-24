@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Iniciando sesión en Amazon ECR...
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+  build:
+    commands:
+      - echo Construyendo la imagen Docker el $(date)
+      - docker build -t erp-demo .
+      - docker tag erp-demo:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/erp-demo-repo:latest
+  post_build:
+    commands:
+      - echo Construcción terminada. Enviando imagen a ECR...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/erp-demo-repo:latest
+      - echo ¡Listo! Imagen actualizada en la nube.
