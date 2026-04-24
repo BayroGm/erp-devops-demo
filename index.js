@@ -7,7 +7,7 @@ app.get('/', (req, res) => {
   res.send('<h1>ERP Demo: Despliegue Seguro ✅</h1><p>Estado: Funcionando en contenedor.</p>');
 });
 
-// Endpoint de Salud: Vital para el Demo en AWS
+// Endpoint de Salud: Vital para el Demo en AWSs
 app.get('/health', (req, res) => {
   res.status(500).send('error');
 });
